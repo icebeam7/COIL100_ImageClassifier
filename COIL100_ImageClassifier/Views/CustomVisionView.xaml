@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="COIL100_ImageClassifier.Views.CustomVisionView"
+             xmlns:vm="clr-namespace:COIL100_ImageClassifier.ViewModels"
+             Title="Image Classifier">
+
+    <ContentPage.BindingContext>
+        <vm:CustomVisionViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Button Text="Browse..." 
+                    Margin="5"
+                    Command="{Binding TakePhotoCommand}" 
+                    WidthRequest="400" 
+                    HorizontalOptions="CenterAndExpand"
+                    BackgroundColor="Black" 
+                    TextColor="White"/>
+
+            <Image x:Name="PhotoImage" 
+                   Margin="5"
+                   Source="{Binding PhotoStream}"
+                   WidthRequest="400" 
+                   HeightRequest="400" 
+                   HorizontalOptions="CenterAndExpand" 
+                   Aspect="AspectFit" />
+
+            <Button Text="What is it?" 
+                    Margin="10" 
+                    Command="{Binding ClassifyPhotoLocalCommand}"
+                    WidthRequest="400" 
+                    HorizontalOptions="CenterAndExpand" 
+                    BackgroundColor="Black" 
+                    TextColor="White"/>
+
+            <ActivityIndicator IsVisible="{Binding IsBusy}" 
+                               IsRunning="{Binding IsBusy}" 
+                               IsEnabled="{Binding IsBusy}"/>
+
+            <Label Margin="5" 
+                   Text="{Binding ClassificationResult}"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   FontSize="Large"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
